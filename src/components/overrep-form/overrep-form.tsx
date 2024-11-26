@@ -96,6 +96,7 @@ export class OverrepForm {
   }
 
   render() {
+    console.log('rendering overrep-form', this.ontologyOptions);
     return (
       <form class="overrep-form" onSubmit={this.handleSubmit}>
         <div class="form-group">

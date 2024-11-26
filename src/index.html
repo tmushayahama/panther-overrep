@@ -3,17 +3,61 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-  <title>Stencil Component Starter</title>
+  <title>Overrep</title>
 
   <script type="module" src="/build/panther-overrep-form.esm.js"></script>
   <script nomodule src="/build/panther-overrep-form.js"></script>
 </head>
 <body>
-  <!-- Full customization -->
-  <overrep-form ontology-options='[{"label":"biological process PAN-GO","id":"biological_process_IBA"}]'
-    example-genes='["AKT1","BDNF","CCKAR"]' submit-url="https://myapi.com/overrep" species="HUMAN" test-type="FISHER"
-    textarea-rows="5" submit-label="Analyze" examples-label="Load Example" gene-ids-label="Enter Gene IDs"
-    ontology-label="Select Ontology" hint="Enter one gene ID per line" show-hint="true">
+  <style>
+    overrep-form {
+      --overrep-width: 500px;
+      --overrep-height: 300px;
+      --overrep-border-color: #cccccc;
+      --overrep-border-width: 1px;
+      --overrep-border-style: solid;
+    }
+
+    .custom-border {
+      --overrep-border-color: #2563eb;
+      --overrep-border-width: 2px;
+      --overrep-border-style: dashed;
+    }
+  </style>
+  <script>
+    // Define your data
+    const ontologyData = [
+      {
+        "label": "biological process PAN-GO",
+        "id": "biological_process_IBA"
+      },
+      {
+        "label": "molecular function PAN-GO",
+        "id": "molecular_function_IBA"
+      },
+      {
+        "label": "cellular component PAN-GO",
+        "id": "cellular_component_IBA"
+      }
+    ];
+
+    const geneData = [
+      "AKT1", "BDNF", "CCKAR", "CHI3L1", "CHRNA7",
+      "CLDN5", "CNR1", "COMT"
+    ];
+
+    // After DOM loads, set the properties
+    window.onload = function () {
+      const form = document.querySelector('overrep-form');
+      form.ontologyOptions = ontologyData;
+      form.exampleGenes = geneData;
+    }
+  </script>
+
+  <overrep-form submit-url="https://enrichment.functionome.org/webservices/go/overrep.jsp" species="HUMAN"
+    test-type="FISHER" textarea-rows="5" submit-label="Analyze" examples-label="Load Example"
+    gene-ids-label="Enter Gene IDs" ontology-label="Select Ontology" hint="Enter one gene ID per line" show-hint="true"
+    style="width: 500px; height: 300px;">
   </overrep-form>
 </body>
 </html>
