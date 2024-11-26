@@ -1,7 +1,19 @@
+import image from '@rollup/plugin-image';
 import { Config } from '@stencil/core';
+import nodePolyfills from 'rollup-plugin-node-polyfills';
+import { sass } from '@stencil/sass';
 
 export const config: Config = {
   namespace: 'panther-overrep-form',
+  plugins: [
+    sass(),
+    image(),
+  ],
+  rollupPlugins: {
+    after: [
+      nodePolyfills(),
+    ]
+  },
   outputTargets: [
     {
       type: 'dist',
@@ -9,8 +21,6 @@ export const config: Config = {
     },
     {
       type: 'dist-custom-elements',
-      customElementsExportBehavior: 'auto-define-custom-elements',
-      externalRuntime: false,
     },
     {
       type: 'docs-readme',
@@ -18,9 +28,14 @@ export const config: Config = {
     {
       type: 'www',
       serviceWorker: null, // disable service workers
+      copy: [
+        { src: '**/*.html' },
+        { src: '*.css' }
+      ]
     },
   ],
-  testing: {
-    browserHeadless: "new",
-  },
+  extras: {
+    enableImportInjection: true
+  }
 };
+

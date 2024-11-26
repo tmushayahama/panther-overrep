@@ -5,57 +5,75 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { FormSubmitEvent, OntologyOption } from "./components/overrep-form/overrep-form";
+export { FormSubmitEvent, OntologyOption } from "./components/overrep-form/overrep-form";
 export namespace Components {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
+    interface OverrepForm {
+        "exampleGenes": string[];
+        "examplesLabel": string;
+        "geneIdsLabel": string;
+        "hint": string;
+        "ontologyLabel": string;
+        "ontologyOptions": OntologyOption[];
+        "showHint": boolean;
+        "species": string;
+        "submitLabel": string;
+        "submitUrl": string;
+        "testType": string;
+        "textareaRows": number;
     }
 }
+export interface OverrepFormCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLOverrepFormElement;
+}
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLOverrepFormElementEventMap {
+        "overrepSubmit": FormSubmitEvent;
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    interface HTMLOverrepFormElement extends Components.OverrepForm, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLOverrepFormElementEventMap>(type: K, listener: (this: HTMLOverrepFormElement, ev: OverrepFormCustomEvent<HTMLOverrepFormElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLOverrepFormElementEventMap>(type: K, listener: (this: HTMLOverrepFormElement, ev: OverrepFormCustomEvent<HTMLOverrepFormElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLOverrepFormElement: {
+        prototype: HTMLOverrepFormElement;
+        new (): HTMLOverrepFormElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
+        "overrep-form": HTMLOverrepFormElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
+    interface OverrepForm {
+        "exampleGenes"?: string[];
+        "examplesLabel"?: string;
+        "geneIdsLabel"?: string;
+        "hint"?: string;
+        "onOverrepSubmit"?: (event: OverrepFormCustomEvent<FormSubmitEvent>) => void;
+        "ontologyLabel"?: string;
+        "ontologyOptions"?: OntologyOption[];
+        "showHint"?: boolean;
+        "species"?: string;
+        "submitLabel"?: string;
+        "submitUrl"?: string;
+        "testType"?: string;
+        "textareaRows"?: number;
     }
     interface IntrinsicElements {
-        "my-component": MyComponent;
+        "overrep-form": OverrepForm;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "overrep-form": LocalJSX.OverrepForm & JSXBase.HTMLAttributes<HTMLOverrepFormElement>;
         }
     }
 }

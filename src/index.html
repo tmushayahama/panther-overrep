@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-    <title>Stencil Component Starter</title>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+  <title>Stencil Component Starter</title>
 
-    <script type="module" src="/build/panther-overrep-form.esm.js"></script>
-    <script nomodule src="/build/panther-overrep-form.js"></script>
-  </head>
-  <body>
-    <my-component first="Stencil" middle="'Don't call me a framework'" last="JS"></my-component>
-  </body>
+  <script type="module" src="/build/panther-overrep-form.esm.js"></script>
+  <script nomodule src="/build/panther-overrep-form.js"></script>
+</head>
+<body>
+  <!-- Full customization -->
+  <overrep-form ontology-options='[{"label":"biological process PAN-GO","id":"biological_process_IBA"}]'
+    example-genes='["AKT1","BDNF","CCKAR"]' submit-url="https://myapi.com/overrep" species="HUMAN" test-type="FISHER"
+    textarea-rows="5" submit-label="Analyze" examples-label="Load Example" gene-ids-label="Enter Gene IDs"
+    ontology-label="Select Ontology" hint="Enter one gene ID per line" show-hint="true">
+  </overrep-form>
+</body>
 </html>
