@@ -1,115 +1,225 @@
-[![Built With Stencil](https://img.shields.io/badge/-Built%20With%20Stencil-16161d.svg?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIgNTEyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI%2BCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI%2BCgkuc3Qwe2ZpbGw6I0ZGRkZGRjt9Cjwvc3R5bGU%2BCjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik00MjQuNywzNzMuOWMwLDM3LjYtNTUuMSw2OC42LTkyLjcsNjguNkgxODAuNGMtMzcuOSwwLTkyLjctMzAuNy05Mi43LTY4LjZ2LTMuNmgzMzYuOVYzNzMuOXoiLz4KPHBhdGggY2xhc3M9InN0MCIgZD0iTTQyNC43LDI5Mi4xSDE4MC40Yy0zNy42LDAtOTIuNy0zMS05Mi43LTY4LjZ2LTMuNkgzMzJjMzcuNiwwLDkyLjcsMzEsOTIuNyw2OC42VjI5Mi4xeiIvPgo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNDI0LjcsMTQxLjdIODcuN3YtMy42YzAtMzcuNiw1NC44LTY4LjYsOTIuNy02OC42SDMzMmMzNy45LDAsOTIuNywzMC43LDkyLjcsNjguNlYxNDEuN3oiLz4KPC9zdmc%2BCg%3D%3D&colorA=16161d&style=flat-square)](https://stenciljs.com)
+# OverrepForm Component
 
-# Stencil Component Starter
+A customizable form component built with StencilJS for gene overrepresentation analysis. This component provides an interface for users to input gene IDs and select ontology options, with support for example data and customizable styling.
 
-This is a starter project for building a standalone Web Component using Stencil.
+## Features
 
-Stencil is also great for building entire apps. For that, use the [stencil-app-starter](https://github.com/ionic-team/stencil-app-starter) instead.
+- Gene ID input textarea with configurable rows
+- Ontology selection dropdown
+- Example data population
+- Customizable labels and hints
+- Flexible submission handling (URL or event-based)
+- Comprehensive CSS theming support
+- Shadow DOM encapsulation
 
-# Stencil
+## Installation
 
-Stencil is a compiler for building fast web apps using Web Components.
-
-Stencil combines the best concepts of the most popular frontend frameworks into a compile-time rather than runtime tool. Stencil takes TypeScript, JSX, a tiny virtual DOM layer, efficient one-way data binding, an asynchronous rendering pipeline (similar to React Fiber), and lazy-loading out of the box, and generates 100% standards-based Web Components that run in any browser supporting the Custom Elements v1 spec.
-
-Stencil components are just Web Components, so they work in any major framework or with no framework at all.
-
-## Getting Started
-
-To start building a new web component using Stencil, clone this repo to a new directory:
+### NPM
 
 ```bash
-git clone https://github.com/ionic-team/stencil-component-starter.git overrep-form
-cd overrep-form
-git remote rm origin
+npm install overrep-form
 ```
 
-and run:
+### CDN
+
+```html
+<script type="module" src="https://unpkg.com/overrep-form@latest/dist/panther-overrep-form/panther-overrep-form.esm.js"></script>
+```
+
+## Usage
+
+### Basic HTML
+
+```html
+
+    <script type="module" src="https://unpkg.com/overrep-form@latest/dist/panther-overrep-form/panther-overrep-form.esm.js"></script>
+    <style>
+        /* Component styles */
+        overrep-form {
+            /* Layout */
+            --overrep-width: 100%;
+            --overrep-height: 450px;
+            
+            /* Colors */
+            --overrep-primary-color: #4a90e2;
+            --overrep-secondary-color: #f5f6f7;
+            --overrep-text-color: #333333;
+            --overrep-border-color: #e1e4e8;
+            
+            /* Typography */
+            --overrep-font-size: 16px;
+            
+            /* Spacing */
+            --overrep-form-spacing: 1.5rem;
+            --overrep-border-radius: 8px;
+            
+            /* Add shadow */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+    <div class="form-container">
+        <overrep-form
+            ontology-options='[
+                {"id": "biological_process_IBA", "label": "biological process PAN-GO"},
+                {"id": "molecular_function_IBA", "label": "molecular function PAN-GO"},
+                {"id": "cellular_component_IBA", "label": "cellular component PAN-GO"}
+            ]'
+            example-genes='["AKT1", "BDNF", "CCKAR", "CHI3L1"]'
+            submit-url="/api/overrep"
+            species="HUMAN"
+            test-type="FISHER"
+            ontology-label="Choose Ontology Type"
+            gene-ids-label="Input Gene IDs"
+            submit-label="Run Analysis"
+            examples-label="Use Example Set"
+            show-hint="true"
+            hint="Accepts gene symbols and IDs"
+        ></overrep-form>
+    </div>
+></overrep-form>
+```
+
+### React
+
+```jsx
+import { OverrepForm } from 'overrep-form';
+
+const App = () => {
+  const ontologyOptions = [
+    { id: "biological_process_IBA", label: "biological process PAN-GO" },
+    { id: "molecular_function_IBA", label: "molecular function PAN-GO" },
+    { id: "cellular_component_IBA", label: "cellular component PAN-GO" }
+  ];
+
+  const exampleGenes = [
+    "AKT1", "BDNF", "CCKAR", "CHI3L1", "CHRNA7",
+    "CLDN5", "CNR1", "COMT"
+  ];
+
+  return (
+    <OverrepForm
+      ontologyOptions={ontologyOptions}
+      exampleGenes={exampleGenes}
+      submitUrl="/api/overrep"
+    />
+  );
+};
+```
+
+### Angular
+
+```typescript
+// app.module.ts
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+export class AppModule {}
+```
+
+```typescript
+// app.component.ts
+import { Component } from '@angular/core';
+import 'overrep-form';
+
+@Component({
+  selector: 'app-root',
+  template: `
+    <overrep-form
+      [ontologyOptions]="ontologyOptions"
+      [exampleGenes]="exampleGenes"
+      submitUrl="/api/overrep"
+    ></overrep-form>
+  `
+})
+export class AppComponent {
+  ontologyOptions = [
+    { id: "biological_process_IBA", label: "biological process PAN-GO" },
+    { id: "molecular_function_IBA", label: "molecular function PAN-GO" },
+    { id: "cellular_component_IBA", label: "cellular component PAN-GO" }
+  ];
+
+  exampleGenes = [
+    "AKT1", "BDNF", "CCKAR", "CHI3L1", "CHRNA7",
+    "CLDN5", "CNR1", "COMT"
+  ];
+}
+```
+
+## Props
+
+| Prop              | Type               | Default                      | Description                           |
+| ----------------- | ------------------ | ---------------------------- | ------------------------------------- |
+| `ontologyOptions` | `OntologyOption[]` | `[]`                         | Array of available ontology options   |
+| `exampleGenes`    | `string[]`         | `[]`                         | Example gene IDs to populate the form |
+| `submitUrl`       | `string`           | `/api/overrep`               | URL for form submission               |
+| `species`         | `string`           | `'HUMAN'`                    | Species identifier                    |
+| `testType`        | `string`           | `'FISHER'`                   | Statistical test type                 |
+| `textareaRows`    | `number`           | `3`                          | Number of rows in gene ID textarea    |
+| `submitLabel`     | `string`           | `'Launch'`                   | Submit button label                   |
+| `examplesLabel`   | `string`           | `'Examples'`                 | Examples button label                 |
+| `geneIdsLabel`    | `string`           | `'Your Gene IDs'`            | Gene IDs input label                  |
+| `ontologyLabel`   | `string`           | `'Ontology'`                 | Ontology selector label               |
+| `hint`            | `string`           | `'can use UniProt ID/AC...'` | Help text shown below form            |
+| `showHint`        | `boolean`          | `true`                       | Toggle hint visibility                |
+
+## Events
+
+The component emits a single event `overrepSubmit` when the form is submitted:
+
+```typescript
+interface FormSubmitEvent {
+  geneIds: string;    // Newline-separated gene IDs
+  ontology: string;   // Selected ontology ID
+  species: string;    // Species identifier
+  testType: string;   // Statistical test type
+}
+```
+
+## Development
+
+1. Clone the repository
+
+```bash
+git clone [will-change-repo]
+```
+
+2. Install dependencies
 
 ```bash
 npm install
+```
+
+3. Start development server
+
+```bash
 npm start
 ```
 
-To build the component for production, run:
-
-```bash
-npm run build
-```
-
-To run the unit tests for the components, run:
+4. Running Tests
 
 ```bash
 npm test
 ```
 
-Need help? Check out our docs [here](https://stenciljs.com/docs/my-first-component).
+5. Build for production
 
-## Naming Components
-
-When creating new component tags, we recommend _not_ using `stencil` in the component name (ex: `<stencil-datepicker>`). This is because the generated component has little to nothing to do with Stencil; it's just a web component!
-
-Instead, use a prefix that fits your company or any name for a group of related components. For example, all of the Ionic-generated web components use the prefix `ion`.
-
-## Using this component
-
-There are two strategies we recommend for using web components built with Stencil.
-
-The first step for all two of these strategies is to [publish to NPM](https://docs.npmjs.com/getting-started/publishing-npm-packages).
-
-You can read more about these different approaches in the [Stencil docs](https://stenciljs.com/docs/publishing).
-
-### Lazy Loading
-
-If your Stencil project is built with the [`dist`](https://stenciljs.com/docs/distribution) output target, you can import a small bootstrap script that registers all components and allows you to load individual component scripts lazily.
-
-For example, given your Stencil project namespace is called `my-design-system`, to use `overrep-form` on any website, inject this into your HTML:
-
-```html
-<script type="module" src="https://unpkg.com/my-design-system"></script>
-<!--
-To avoid unpkg.com redirects to the actual file, you can also directly import:
-https://unpkg.com/foobar-design-system@0.0.1/dist/foobar-design-system/foobar-design-system.esm.js
--->
-<overrep-form first="Stencil" middle="'Don't call me a framework'" last="JS"></overrep-form>
+```bash
+npm run build
 ```
 
-This will only load the necessary scripts needed to render `<overrep-form />`. Once more components of this package are used, they will automatically be loaded lazily.
+## Browser Support
 
-You can also import the script as part of your `node_modules` in your applications entry file:
+- Chrome 67+
+- Firefox 63+
+- Safari 10.1+
+- Edge 79+
 
-```tsx
-import 'foobar-design-system/dist/foobar-design-system/foobar-design-system.esm.js';
-```
+## License
 
-Check out this [Live Demo](https://stackblitz.com/edit/vitejs-vite-y6v26a?file=src%2Fmain.tsx).
-
-### Standalone
-
-If you are using a Stencil component library with `dist-custom-elements`, we recommend importing Stencil components individually in those files where they are needed.
-
-To export Stencil components as standalone components make sure you have the [`dist-custom-elements`](https://stenciljs.com/docs/custom-elements) output target defined in your `stencil.config.ts`.
-
-For example, given you'd like to use `<overrep-form />` as part of a React component, you can import the component directly via:
-
-```tsx
-import 'foobar-design-system/overrep-form';
-
-function App() {
-  return (
-    <>
-      <div>
-        <overrep-form
-          first="Stencil"
-          middle="'Don't call me a framework'"
-          last="JS"
-        ></overrep-form>
-      </div>
-    </>
-  );
-}
-
-export default App;
-```
-
-Check out this [Live Demo](https://stackblitz.com/edit/vitejs-vite-b6zuds?file=src%2FApp.tsx).
+MIT

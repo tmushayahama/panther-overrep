@@ -29,7 +29,7 @@ export class OverrepForm {
   @Prop() examplesLabel: string = 'Examples';
   @Prop() geneIdsLabel: string = 'Your Gene IDs';
   @Prop() ontologyLabel: string = 'Ontology';
-  @Prop() hint: string = 'can use UniProt ID/AC, Gene Name, Gene Symbols, MOD IDs';
+  @Prop() hint: string = 'can use UniProt ID/AC, Gene Name, Gene Symbols';
   @Prop() showHint: boolean = true;
 
   // Optional callback event
