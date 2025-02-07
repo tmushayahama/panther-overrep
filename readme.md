@@ -17,13 +17,13 @@ A customizable form component built with StencilJS for gene overrepresentation a
 ### NPM
 
 ```bash
-npm install overrep-form
+npm install pango-toolbar
 ```
 
 ### CDN
 
 ```html
-<script type="module" src="https://unpkg.com/overrep-form@latest/dist/panther-overrep-form/panther-overrep-form.esm.js"></script>
+<script type="module" src="https://unpkg.com/pango-toolbar@latest/dist/panther-pango-toolbar/panther-pango-toolbar.esm.js"></script>
 ```
 
 ## Usage
@@ -32,10 +32,10 @@ npm install overrep-form
 
 ```html
 
-    <script type="module" src="https://unpkg.com/overrep-form@latest/dist/panther-overrep-form/panther-overrep-form.esm.js"></script>
+    <script type="module" src="https://unpkg.com/pango-toolbar@latest/dist/panther-pango-toolbar/panther-pango-toolbar.esm.js"></script>
     <style>
         /* Component styles */
-        overrep-form {
+        pango-toolbar {
             /* Layout */
             --overrep-width: 100%;
             --overrep-height: 450px;
@@ -50,7 +50,7 @@ npm install overrep-form
             --overrep-font-size: 16px;
             
             /* Spacing */
-            --overrep-form-spacing: 1.5rem;
+            --pango-toolbar-spacing: 1.5rem;
             --overrep-border-radius: 8px;
             
             /* Add shadow */
@@ -58,7 +58,7 @@ npm install overrep-form
         }
     </style>
     <div class="form-container">
-        <overrep-form
+        <pango-toolbar
             ontology-options='[
                 {"id": "biological_process_IBA", "label": "biological process PAN-GO"},
                 {"id": "molecular_function_IBA", "label": "molecular function PAN-GO"},
@@ -74,15 +74,15 @@ npm install overrep-form
             examples-label="Use Example Set"
             show-hint="true"
             hint="Accepts gene symbols and IDs"
-        ></overrep-form>
+        ></pango-toolbar>
     </div>
-></overrep-form>
+></pango-toolbar>
 ```
 
 ### React
 
 ```jsx
-import { OverrepForm } from 'overrep-form';
+import { OverrepForm } from 'pango-toolbar';
 
 const App = () => {
   const ontologyOptions = [
@@ -125,16 +125,16 @@ export class AppModule {}
 ```typescript
 // app.component.ts
 import { Component } from '@angular/core';
-import 'overrep-form';
+import 'pango-toolbar';
 
 @Component({
   selector: 'app-root',
   template: `
-    <overrep-form
+    <pango-toolbar
       [ontologyOptions]="ontologyOptions"
       [exampleGenes]="exampleGenes"
       submitUrl="/api/overrep"
-    ></overrep-form>
+    ></pango-toolbar>
   `
 })
 export class AppComponent {

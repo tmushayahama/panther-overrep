@@ -96,7 +96,6 @@ export class OverrepForm {
   }
 
   render() {
-    console.log('rendering overrep-form', this.ontologyOptions);
     return (
       <form class="overrep-form" onSubmit={this.handleSubmit}>
         <div class="form-group">
@@ -107,6 +106,11 @@ export class OverrepForm {
             onInput={this.handleGeneIdsChange}
             class="form-textarea"
           />
+          {this.showHint && (
+            <small class="hint">
+              <strong>Hint:</strong> {this.hint}
+            </small>
+          )}
         </div>
 
         <div class="form-group">
@@ -145,11 +149,7 @@ export class OverrepForm {
           </button>
         </div>
 
-        {this.showHint && (
-          <small class="hint">
-            <strong>Hint:</strong> {this.hint}
-          </small>
-        )}
+
       </form>
     );
   }
